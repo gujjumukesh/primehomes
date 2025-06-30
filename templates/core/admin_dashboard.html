@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - PrimeHomes Constructions{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-white py-5" style="margin-top: 76px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">Admin Dashboard</h1>
+                <p class="lead">Manage your construction company website</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Cards -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm bg-primary text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tools fa-3x mb-3"></i>
+                        <h3 class="fw-bold">{{ services_count }}</h3>
+                        <p class="mb-0">Services</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm bg-success text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-building fa-3x mb-3"></i>
+                        <h3 class="fw-bold">{{ projects_count }}</h3>
+                        <p class="mb-0">Projects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm bg-warning text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope fa-3x mb-3"></i>
+                        <h3 class="fw-bold">{{ messages_count }}</h3>
+                        <p class="mb-0">New Messages</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm bg-info text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-star fa-3x mb-3"></i>
+                        <h3 class="fw-bold">{{ testimonials_count }}</h3>
+                        <p class="mb-0">Reviews</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Quick Actions</h2>
+                <p class="lead text-muted">Manage your website content</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tools fa-4x text-primary mb-3"></i>
+                        <h5>Manage Services</h5>
+                        <p class="text-muted">Add, edit, or remove services</p>
+                        <a href="/admin/core/service/" class="btn btn-primary">Manage Services</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-building fa-4x text-success mb-3"></i>
+                        <h5>Manage Projects</h5>
+                        <p class="text-muted">Add, edit, or remove projects</p>
+                        <a href="/admin/core/project/" class="btn btn-success">Manage Projects</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope fa-4x text-warning mb-3"></i>
+                        <h5>View Messages</h5>
+                        <p class="text-muted">Check contact form submissions</p>
+                        <a href="/admin/core/contactmessage/" class="btn btn-warning">View Messages</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-star fa-4x text-info mb-3"></i>
+                        <h5>Manage Reviews</h5>
+                        <p class="text-muted">Approve or remove testimonials</p>
+                        <a href="/admin/core/testimonial/" class="btn btn-info">Manage Reviews</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Activity -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Recent Projects -->
+            <div class="col-lg-6 mb-5">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Recent Projects</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for project in recent_projects %}
+                        <div class="d-flex align-items-center mb-3">
+                            {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                            {% else %}
+                            <div class="bg-light rounded me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fas fa-building text-muted"></i>
+                            </div>
+                            {% endif %}
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">{{ project.title }}</h6>
+                                <small class="text-muted">{{ project.category }} • {{ project.status }}</small>
+                            </div>
+                            <a href="/admin/core/project/{{ project.id }}/change/" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">No projects yet.</p>
+                        {% endfor %}
+                        <div class="text-center mt-3">
+                            <a href="/admin/core/project/" class="btn btn-primary">View All Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Messages -->
+            <div class="col-lg-6 mb-5">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Recent Messages</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for message in recent_messages %}
+                        <div class="border-bottom pb-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1">{{ message.name }}</h6>
+                                    <p class="text-muted mb-1">{{ message.subject }}</p>
+                                    <small class="text-muted">{{ message.created_at|date:"M d, Y" }}</small>
+                                </div>
+                                {% if not message.is_read %}
+                                <span class="badge bg-warning">New</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">No messages yet.</p>
+                        {% endfor %}
+                        <div class="text-center mt-3">
+                            <a href="/admin/core/contactmessage/" class="btn btn-primary">View All Messages</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company Settings -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3">Company Settings</h2>
+                <p class="lead text-muted">Update your company information</p>
+                <a href="/admin/core/companyinfo/" class="btn btn-primary btn-lg">Manage Company Info</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

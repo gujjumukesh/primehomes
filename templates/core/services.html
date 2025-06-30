@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - PrimeHomes Constructions{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-white py-5" style="margin-top: 76px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">Our Services</h1>
+                <p class="lead">Comprehensive construction solutions tailored to your needs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.title }}" style="height: 250px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="{{ service.icon }} fa-4x" style="color: {{ service.color }};"></i>
+                        </div>
+                        <h4 class="card-title">{{ service.title }}</h4>
+                        <p class="card-text text-muted">{{ service.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <div class="py-5">
+                    <i class="fas fa-tools fa-5x text-muted mb-4"></i>
+                    <h3 class="text-muted">No Services Available</h3>
+                    <p class="text-muted">We're currently updating our services. Please check back soon!</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Why Choose PrimeHomes?</h2>
+                <p class="lead text-muted">We deliver excellence in every project</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-medal fa-3x text-primary mb-3"></i>
+                    <h5>Quality Assurance</h5>
+                    <p class="text-muted">We maintain the highest standards in all our projects</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                    <h5>Timely Delivery</h5>
+                    <p class="text-muted">We complete projects on schedule, every time</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-dollar-sign fa-3x text-primary mb-3"></i>
+                    <h5>Competitive Pricing</h5>
+                    <p class="text-muted">Best value for your investment</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+                    <h5>24/7 Support</h5>
+                    <p class="text-muted">We're here when you need us</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3">Ready to Get Started?</h2>
+                <p class="lead mb-4">Contact us today to discuss your project requirements</p>
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg">Get Free Quote</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

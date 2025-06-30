@@ -1,0 +1,379 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - PrimeHomes Constructions{% endblock %}
+
+{% block content %}
+<!-- Section 1: First fixed background -->
+<section class="bg-fixed-1 d-flex align-items-center text-white reveal" style="min-height:80vh;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-4 fw-bold mb-4">
+                    {% if company_info %}{{ company_info.tagline }}{% else %}Building Your Dreams Into Reality{% endif %}
+                </h1>
+                <p class="lead mb-4">
+                    {% if company_info %}{{ company_info.description }}{% else %}
+                    With over 15 years of experience in the construction industry, we deliver excellence in every project.
+                    {% endif %}
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'projects' %}" class="btn btn-light btn-lg" role="button">View Our Work</a>
+                    <a href="{% url 'quote_request' %}" class="btn btn-outline-light btn-lg" role="button">Get Quote</a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center">
+                <div class="image-grid">
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="hero-img-wrap">
+                                <img src="/media/slides/image1.jpg" class="img-fluid hero-img-effect" alt="Slide 1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-img-wrap">
+                                <img src="/media/slides/img2.jpg" class="img-fluid hero-img-effect" alt="Slide 2">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-img-wrap">
+                                <img src="/media/slides/img3.jpg" class="img-fluid hero-img-effect" alt="Slide 3">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-img-wrap">
+                                <img src="/media/slides/image4.jpg" class="img-fluid hero-img-effect" alt="Slide 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<svg class="section-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#f7f8fa" d="M0,0 C480,60 960,0 1440,60 L1440,60 L0,60 Z"></path></svg>
+
+<!-- Section 2: Normal content (scrolls over white background) -->
+<section style="background: #fff;" class="reveal">
+    <div class="container py-5">
+        <h2 class="display-5 fw-bold section-title">About Us</h2>
+        <p class="lead text-muted mb-4">PrimeHomes Constructions delivers quality, innovation, and trust in every project.</p>
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <h4 class="fw-bold mb-3">Our Mission</h4>
+                <p>At PrimeHomes Constructions, our mission is to turn your dreams into reality by building spaces that inspire, endure, and elevate your lifestyle. We are committed to delivering exceptional craftsmanship, innovative solutions, and transparent communication throughout every stage of your project.</p>
+                <h4 class="fw-bold mb-3 mt-4">Why Choose Us?</h4>
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Over 15 years of industry experience</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Dedicated team of skilled professionals</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Transparent process and timely delivery</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Commitment to quality and client satisfaction</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Innovative design and sustainable practices</li>
+                </ul>
+                <a href="{% url 'about' %}" class="btn btn-outline-primary btn-lg">Learn More About Us</a>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3 text-primary">Our Core Values</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><i class="fas fa-gem text-primary me-2"></i> Integrity &amp; Honesty</li>
+                            <li class="mb-2"><i class="fas fa-lightbulb text-primary me-2"></i> Innovation</li>
+                            <li class="mb-2"><i class="fas fa-users text-primary me-2"></i> Teamwork</li>
+                            <li class="mb-2"><i class="fas fa-leaf text-primary me-2"></i> Sustainability</li>
+                            <li class="mb-2"><i class="fas fa-handshake text-primary me-2"></i> Client Focus</li>
+                        </ul>
+                        <div class="mt-4">
+                            <h6 class="fw-bold">Ready to start your project?</h6>
+                            <a href="{% url 'contact' %}" class="btn btn-primary btn-sm mt-2">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<svg class="section-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0,0 C480,60 960,0 1440,60 L1440,60 L0,60 Z"></path></svg>
+
+<!-- Section 3: Second fixed background -->
+<section class="bg-fixed-2 d-flex align-items-center text-white" style="min-height:80vh;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center py-5">
+                <h2 class="display-4 fw-bold mb-4">Our Vision</h2>
+                <p class="lead mb-0">We build the future with passion, precision, and a commitment to excellence.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Third fixed background -->
+<section class="bg-fixed-3 d-flex align-items-center text-white" style="min-height:80vh;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center py-5">
+                <h2 class="display-4 fw-bold mb-4">Innovative Urban Living</h2>
+                <p class="lead mb-0">We embrace modern architecture and smart city solutions for a brighter tomorrow.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Fourth fixed background -->
+<section class="bg-fixed-4 d-flex align-items-center text-white" style="min-height:80vh;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center py-5">
+                <h2 class="display-4 fw-bold mb-4">Global Cityscapes</h2>
+                <p class="lead mb-0">Our projects span across vibrant cities, shaping skylines and communities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Fifth fixed background -->
+<section class="bg-fixed-5 d-flex align-items-center text-white" style="min-height:80vh;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center py-5">
+                <h2 class="display-4 fw-bold mb-4">Reflections of Excellence</h2>
+                <p class="lead mb-0">We create iconic structures that stand the test of time and inspire generations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Image Slider Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="display-5 fw-bold section-title">Our Construction Excellence</h2>
+                <p class="lead text-muted">Showcasing our quality work and professional craftsmanship</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="swiper-container two">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slider-image">
+                                <img src="/media/slides/image1.jpg" alt="Construction Project 1">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slider-image">
+                                <img src="/media/slides/img2.jpg" alt="Construction Project 2">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slider-image">
+                                <img src="/media/slides/img3.jpg" alt="Construction Project 3">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slider-image">
+                                <img src="/media/slides/image4.jpg" alt="Construction Project 4">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slider-image">
+                                <img src="/media/slides/imag5.jpg" alt="Construction Project 5">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 bg-transparent">
+                    <div class="card-body">
+                        <i class="fas fa-home fa-3x text-primary mb-3"></i>
+                        <h3 class="fw-bold">
+                            {% if company_info %}{{ company_info.projects_completed }}{% else %}500+{% endif %}
+                        </h3>
+                        <p class="text-muted">Projects Completed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 bg-transparent">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                        <h3 class="fw-bold">
+                            {% if company_info %}{{ company_info.years_experience }}{% else %}15+{% endif %}
+                        </h3>
+                        <p class="text-muted">Years Experience</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 bg-transparent">
+                    <div class="card-body">
+                        <i class="fas fa-smile fa-3x text-primary mb-3"></i>
+                        <h3 class="fw-bold">
+                            {% if company_info %}{{ company_info.client_satisfaction }}{% else %}100%{% endif %}
+                        </h3>
+                        <p class="text-muted">Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-5 bg-light shadow-lg" style="background-image: url('/static/img/3074103.jpg'); background-position: center center; background-size: cover; background-repeat: no-repeat; position: relative;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); z-index: 1;"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center mb-5 text-white">
+        <h2 class="display-5 fw-bold section-title">Our Services</h2>
+        <p class="lead">We offer comprehensive construction services to meet all your building needs</p>
+      </div>
+    </div>
+    <div class="row">
+      {% for service in services %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100 service-card glass-card text-white">
+          {% if service.image %}
+          <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.title }}" style="height: 200px; object-fit: cover;">
+          {% endif %}
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <i class="{{ service.icon }} fa-3x" style="color: {{ service.color }};"></i>
+            </div>
+            <h5 class="card-title text-white">{{ service.title }}</h5>
+            <p class="card-text text-white">{{ service.description|truncatewords:20 }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p class="text-muted">No services available yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+      <a href="{% url 'services' %}" class="btn btn-primary btn-lg">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section class="py-5 shadow-lg" style="background-image: url('/static/img/3096021.jpg'); background-position: center center; background-size: cover; background-repeat: no-repeat; position: relative;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); z-index: 1;"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center mb-5 text-white">
+        <h2 class="display-5 fw-bold section-title">Recent Projects</h2>
+        <p class="lead">Take a look at some of our latest construction projects</p>
+      </div>
+    </div>
+    <div class="row">
+      {% for project in projects %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card project-card glass-card text-white">
+          {% if project.image %}
+          <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 250px; object-fit: cover;">
+          {% else %}
+          <div class="project-image-placeholder">
+            <i class="fas fa-building fa-4x"></i>
+          </div>
+          {% endif %}
+          <div class="card-body">
+            <div class="mb-3">
+              <span class="badge bg-primary me-2">{{ project.category }}</span>
+              <span class="badge bg-{% if project.status == 'Completed' %}success{% elif project.status == 'In Progress' %}warning{% else %}info{% endif %}">{{ project.status }}</span>
+            </div>
+            <h5 class="card-title text-white">{{ project.title }}</h5>
+            <p class="card-text text-white">{{ project.description|truncatewords:15 }}</p>
+            <small class="text-white">{{ project.created_at|date:"M Y" }}</small>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p class="text-muted">No projects available yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+      <a href="{% url 'projects' %}" class="btn btn-primary btn-lg">View All Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light reveal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="display-5 fw-bold section-title">What Our Clients Say</h2>
+                <p class="lead text-muted">Don't just take our word for it - hear from our satisfied clients</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for testimonial in testimonials %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="card testimonial-card h-100 mx-auto" style="max-width: 500px;">
+                                <div class="card-body text-center">
+                                    <div class="mb-3">
+                                        {% for i in "12345" %}
+                                        <i class="fas fa-star {% if forloop.counter <= testimonial.rating %}text-warning{% else %}text-muted{% endif %}"></i>
+                                        {% endfor %}
+                                    </div>
+                                    <p class="card-text fst-italic">"{{ testimonial.comment }}"</p>
+                                    <h6 class="card-title mb-0">{{ testimonial.name }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'testimonials' %}" class="btn btn-outline-primary btn-lg">View All Reviews</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white reveal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3">Ready to Start Your Project?</h2>
+                <p class="lead mb-4">Let's discuss your construction needs and bring your vision to life</p>
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg cta-animated">Get Started Today</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

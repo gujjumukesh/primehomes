@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects - PrimeHomes Constructions{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-white py-5" style="margin-top: 76px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">Our Projects</h1>
+                <p class="lead">Explore our portfolio of successful construction projects</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Filter buttons removed as per user request -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row" id="projects-grid">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 mb-4 project-item" data-category="{{ project.category_code }}">
+                <div class="card project-card fade-in">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                    <div class="project-image-placeholder">
+                        <i class="fas fa-building fa-4x"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="badge bg-primary me-2">{{ project.category }}</span>
+                            <span class="badge bg-{% if project.status == 'Completed' %}success{% elif project.status == 'In Progress' %}warning{% else %}info{% endif %}">{{ project.status }}</span>
+                        </div>
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                        <small class="text-muted">{{ project.created_at|date:"M Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <div class="py-5">
+                    <i class="fas fa-building fa-5x text-muted mb-4"></i>
+                    <h3 class="text-muted">No Projects Available</h3>
+                    <p class="text-muted">We're currently updating our portfolio. Please check back soon!</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3">Inspired by Our Work?</h2>
+                <p class="lead mb-4">Let's create something amazing together</p>
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg">Start Your Project</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const filter = this.getAttribute('data-filter');
+            projectItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %} 
