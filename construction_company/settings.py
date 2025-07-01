@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure--=c09kvxcf@paj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'primehomes-izrck6h2g-mukeshrock809-2432s-projects.vercel.app']
 
 # Load production settings if VERCEL_ENV is set to 'production'
 if os.environ.get('VERCEL_ENV') == 'production':
