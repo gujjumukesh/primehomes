@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure--=c09kvxcf@paj=)8x1&#(lll64-fr_i-n87$%*_v43wacv_m3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('RAILWAY_STATIC_URL', '.railway.app'), '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'primehomes-izrck6h2g-mukeshrock809-2432s-projects.vercel.app']
 
 
 # Application definition
