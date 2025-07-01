@@ -21,12 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--=c09kvxcf@paj=)8x1&#(lll64-fr_i-n87$%*_v43wacv_m3"
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure--=c09kvxcf@paj=)8x1&#(lll64-fr_i-n87$%*_v43wacv_m3')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('RAILWAY_STATIC_URL', '.railway.app'), '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+# Load production settings if VERCEL_ENV is set to 'production'
+if os.environ.get('VERCEL_ENV') == 'production':
+    from .settings_prod import *
 
 
 # Application definition
