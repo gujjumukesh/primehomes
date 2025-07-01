@@ -27,7 +27,7 @@
                     {% endif %}
                     <div class="card-body text-center">
                         <div class="mb-3">
-                            <i class="{{ service.icon }} fa-4x" style="color: {{ service.color }};"></i>
+                            <i class="{{ service.icon }} fa-4x" style="color: {{ service.color|safe }};"></i>
                         </div>
                         <h4 class="card-title">{{ service.title }}</h4>
                         <p class="card-text text-muted">{{ service.description }}</p>
@@ -101,4 +101,4 @@
         </div>
     </div>
 </section>
-{% endblock %} 
+{% endblock %}
