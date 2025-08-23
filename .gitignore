@@ -78,7 +78,7 @@ profile_default/
 ipython_config.py
 
 # pyenv
-# .python-version # Commented out to allow .python-version to be committed
+# .python-version # Re-commented to allow .python-version to be committed
 
 # pip - conventions
 pip-freeze.txt

@@ -4,12 +4,12 @@ services:
     env: python
     plan: starter
     rootDir: .
-    buildCommand: python3.11 -m pip install -r requirements.txt
-    startCommand: python3.11 manage.py migrate && python3.11 manage.py collectstatic --noinput && gunicorn construction_company.wsgi:application --bind 0.0.0.0:$PORT
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn construction_company.wsgi:application --bind 0.0.0.0:$PORT
     publishPath: ./staticfiles
     envVars:
       - key: WEB_CONCURRENCY
         value: 4 # Adjust based on your needs
       # Add other environment variables as needed, e.g., SECRET_KEY, DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_KEY
       # It's recommended to set sensitive variables directly in Render dashboard for security.
-      # PYTHON_VERSION is now specified in runtime.txt
+      # Python version is now specified in .python-version file
