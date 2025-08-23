@@ -84,9 +84,13 @@ DATABASES = {
     'default': dj_database_url.config(conn_max_age=600)
 }
 
-# For Vercel deployment
-if os.environ.get('VERCEL_ENVIRONMENT') == 'production':
-    ALLOWED_HOSTS.extend(['.vercel.app', '.now.sh'])
+# For Netlify deployment
+if os.environ.get('NETLIFY') == 'true':
+    ALLOWED_HOSTS.extend([
+        os.environ.get('URL'), # Primary Netlify URL
+        os.environ.get('DEPLOY_PRIME_URL'), # Deploy preview URL
+        '.netlify.app' # Generic Netlify domain
+    ])
     DEBUG = False
 
 
