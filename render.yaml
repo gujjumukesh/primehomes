@@ -1,15 +1,22 @@
 services:
   - type: web
-    name: construction-company-website
+    name: django-app
     env: python
-    plan: starter
-    rootDir: .
     buildCommand: pip install -r requirements.txt
-    startCommand: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn construction_company.wsgi:application --bind 0.0.0.0:$PORT
-    publishPath: ./staticfiles
+    startCommand: gunicorn construction_company.wsgi:application
     envVars:
-      - key: WEB_CONCURRENCY
-        value: 4 # Adjust based on your needs
-      # Add other environment variables as needed, e.g., SECRET_KEY, DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_KEY
-      # It's recommended to set sensitive variables directly in Render dashboard for security.
-      # Python version is now specified in .python-version file
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: django-app-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: false
+
+databases:
+  - name: django-app-db
+    databaseName: django_app
+    plan: free
