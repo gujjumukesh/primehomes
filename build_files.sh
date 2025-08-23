@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Install build tools, Python development headers, MySQL client libraries
-apt-get update && apt-get install -y build-essential python3-dev libmysqlclient-dev
+# Install build tools, Python development headers, MySQL client libraries and Python itself
+apt-get update && apt-get install -y build-essential python3-dev python3-pip libmysqlclient-dev
 
 # Install Rust and Cargo
 if ! command -v rustc &> /dev/null || ! command -v cargo &> /dev/null; then
