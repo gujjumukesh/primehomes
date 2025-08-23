@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}Get a Quote - PrimeHomes Constructions{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-white py-5" style="margin-top: 76px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-3">Get Your Free Quote</h1>
+                <p class="lead">Tell us about your project and we'll provide you with a detailed estimate</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quote Request Form Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h3 class="mb-4 text-center">Project Quote Request</h3>
+                        <p class="text-muted text-center mb-4">Please provide detailed information about your project so we can give you the most accurate quote.</p>
+                        
+                        <form method="post" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            
+                            <!-- Personal Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="mb-3 text-primary">Personal Information</h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.name.id_for_label }}" class="form-label">Full Name *</label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                    <div class="text-danger small">{{ form.name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email Address *</label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                    <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number *</label>
+                                    {{ form.phone }}
+                                    {% if form.phone.errors %}
+                                    <div class="text-danger small">{{ form.phone.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.company.id_for_label }}" class="form-label">Company Name</label>
+                                    {{ form.company }}
+                                    {% if form.company.errors %}
+                                    <div class="text-danger small">{{ form.company.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Project Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="mb-3 text-primary">Project Information</h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.project_type.id_for_label }}" class="form-label">Project Type *</label>
+                                    {{ form.project_type }}
+                                    {% if form.project_type.errors %}
+                                    <div class="text-danger small">{{ form.project_type.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.location.id_for_label }}" class="form-label">Project Location *</label>
+                                    {{ form.location }}
+                                    {% if form.location.errors %}
+                                    <div class="text-danger small">{{ form.location.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="{{ form.project_description.id_for_label }}" class="form-label">Project Description *</label>
+                                    {{ form.project_description }}
+                                    {% if form.project_description.errors %}
+                                    <div class="text-danger small">{{ form.project_description.errors.0 }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Please provide as much detail as possible about your project requirements, specifications, and goals.</div>
+                                </div>
+                            </div>
+
+                            <!-- Budget and Timeline -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="mb-3 text-primary">Budget & Timeline</h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.budget_range.id_for_label }}" class="form-label">Budget Range *</label>
+                                    {{ form.budget_range }}
+                                    {% if form.budget_range.errors %}
+                                    <div class="text-danger small">{{ form.budget_range.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.timeline.id_for_label }}" class="form-label">Project Timeline *</label>
+                                    {{ form.timeline }}
+                                    {% if form.timeline.errors %}
+                                    <div class="text-danger small">{{ form.timeline.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Additional Requirements -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="mb-3 text-primary">Additional Information</h5>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="{{ form.additional_requirements.id_for_label }}" class="form-label">Additional Requirements</label>
+                                    {{ form.additional_requirements }}
+                                    {% if form.additional_requirements.errors %}
+                                    <div class="text-danger small">{{ form.additional_requirements.errors.0 }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Any special requirements, preferences, or additional information you'd like us to know.</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">Submit Quote Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="display-5 fw-bold">Why Choose PrimeHomes?</h2>
+                <p class="lead text-muted">We provide comprehensive quotes and exceptional service</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-calculator fa-3x text-primary mb-3"></i>
+                    <h5>Detailed Estimates</h5>
+                    <p class="text-muted">We provide comprehensive, itemized quotes with no hidden costs.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                    <h5>Quick Response</h5>
+                    <p class="text-muted">Get your quote within 24-48 hours of submitting your request.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-handshake fa-3x text-primary mb-3"></i>
+                    <h5>Expert Consultation</h5>
+                    <p class="text-muted">Our experienced team will guide you through every step of your project.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h3 class="mb-4">Need Immediate Assistance?</h3>
+                <p class="lead mb-4">Call us directly for urgent inquiries or to schedule a site visit</p>
+                {% if company_info %}
+                <div class="d-flex justify-content-center gap-4 mb-4">
+                    <div class="text-center">
+                        <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                        <p class="mb-0 fw-bold">{{ company_info.phone }}</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                        <p class="mb-0 fw-bold">{{ company_info.email }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="d-flex justify-content-center gap-4 mb-4">
+                    <div class="text-center">
+                        <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                        <p class="mb-0 fw-bold">(555) 123-4567</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                        <p class="mb-0 fw-bold">info@primehomes.com</p>
+                    </div>
+                </div>
+                {% endif %}
+                <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
