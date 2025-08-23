@@ -1,21 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "build_files.sh",
-      "use": "@vercel/static-build",
-      "config": {
-        "includeFiles": [
-          "requirements.txt",
-          "manage.py",
-          "core/**",
-          "construction_company/**",
-          "static/**",
-          "templates/**",
-          ".env"
-        ]
-      }
-    }
-  ],
   "functions": {
     "api/index.py": {
       "runtime": "python3.11",
