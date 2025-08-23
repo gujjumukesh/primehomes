@@ -1,0 +1,1 @@
+startCommand: gunicorn construction_company.wsgi:application
