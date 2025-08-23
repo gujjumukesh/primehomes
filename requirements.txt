@@ -268,7 +268,6 @@ python3-openid==3.2.0
 pytweening==1.2.0
 pytz==2025.1
 pywhatkit==5.4
-pywin32==306
 pywinpty==2.0.12
 PyYAML==6.0.1
 pyzmq==25.1.2
