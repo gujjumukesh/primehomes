@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Install build tools, Python development headers, MySQL client libraries, Python, and pkg-config
-apt-get update && apt-get install -y build-essential python3-dev python3-pip libmysqlclient-dev pkg-config
+# Install build tools, Python development headers, MySQL client libraries, Python 3.11, and pkg-config
+apt-get update && apt-get install -y build-essential python3.11-dev python3.11-pip libmysqlclient-dev pkg-config
+
+# Set Python 3.11 as the default for the build environment
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 
 # Rust toolchain verification and installation
 if ! command -v rustc &> /dev/null || ! command -v cargo &> /dev/null; then
