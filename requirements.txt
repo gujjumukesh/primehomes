@@ -8,6 +8,7 @@ django-storages==1.14.2
 # Database and environment
 dj-database-url==2.1.0
 python-dotenv==1.1.1
+psycopg2-binary==2.9.9 # PostgreSQL adapter
 
 # Supabase integration
 supabase==2.0.3
