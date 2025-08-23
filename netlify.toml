@@ -3,6 +3,9 @@
   publish = "staticfiles"
 
 [build.environment]
+  PYTHON_VERSION = "3.10"
+  LANG = "en_US.UTF-8"
+  LC_ALL = "en_US.UTF-8"
   MYSQLCLIENT_CFLAGS = "-I/usr/include/mysql"
   MYSQLCLIENT_LDFLAGS = "-L/usr/lib/x86_64-linux-gnu -lmysqlclient"
 
