@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: construction-company-website
+    env: python
+    plan: starter
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn construction_company.wsgi:application --bind 0.0.0.0:$PORT
+    publishPath: ./staticfiles
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.x
+      - key: WEB_CONCURRENCY
+        value: 4 # Adjust based on your needs
+      # Add other environment variables as needed, e.g., SECRET_KEY, DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_KEY
+      # It's recommended to set sensitive variables directly in Render dashboard for security.

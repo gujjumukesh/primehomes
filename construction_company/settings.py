@@ -26,13 +26,18 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--=c09kvxcf@paj=)8x1&#(lll64-fr_i-n87$%*_v43wacv_m3"
+SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure--=c09kvxcf@paj=)8x1&#(lll64-fr_i-n87$%*_v43wacv_m3")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = [os.environ.get('RAILWAY_STATIC_URL', '.railway.app'), '127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS = [
+    os.environ.get('RAILWAY_STATIC_URL', '.railway.app'), 
+    '127.0.0.1', 
+    'localhost',
+    '.vercel.app',
+    '.railway.app'
+]
 
 # Application definition
 
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Add WhiteNoise for static files
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -93,6 +99,19 @@ if os.environ.get('NETLIFY') == 'true':
     ])
     DEBUG = False
 
+# For Vercel deployment
+if os.environ.get('VERCEL') == 'true' or '.vercel.app' in os.environ.get('ALLOWED_HOSTS', ''):
+    DEBUG = False
+    # Add Vercel-specific settings here if needed
+
+# For Railway deployment
+if os.environ.get('RAILWAY') == 'true' or '.railway.app' in os.environ.get('ALLOWED_HOSTS', ''):
+    DEBUG = False
+    # Railway-specific settings
+    CSRF_TRUSTED_ORIGINS = [
+        'https://*.railway.app',
+        'https://*.up.railway.app'
+    ]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -138,6 +157,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Supabase Configuration
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_SERVICE_KEY = os.environ.get('SUPABASE_SERVICE_KEY')
+SUPABASE_BUCKET_NAME = "static-media"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -146,3 +170,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Login URL for admin dashboard
 LOGIN_URL = "/admin/login/"
 LOGIN_REDIRECT_URL = "/admin-dashboard/"
+
+# Static files configuration for production
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

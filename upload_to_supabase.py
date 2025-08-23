@@ -1,60 +1,76 @@
 import os
-import supabase
+import sys
 from dotenv import load_dotenv
+
+# Add the project root to Python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Get Supabase credentials from environment variables
-supabase_url = os.getenv("SUPABASE_URL")
-supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
+# Import Django settings
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'construction_company.settings')
+import django
+django.setup()
 
-# Check if credentials are provided
-if not supabase_url or not supabase_key:
-    print("Error: SUPABASE_URL and SUPABASE_SERVICE_KEY must be set in the .env file.")
-    exit()
+from core.supabase_utils import upload_directory_to_supabase, get_supabase_client
 
-# Initialize Supabase client
-client = supabase.create_client(supabase_url, supabase_key)
+def main():
+    # Get Supabase credentials from environment variables
+    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
 
-# Function to upload files from a local directory to a Supabase bucket
-def upload_directory_to_supabase(local_dir, bucket_name):
-    if not os.path.isdir(local_dir):
-        print(f"Error: Directory '{local_dir}' not found.")
+    # Check if credentials are provided
+    if not supabase_url or not supabase_key:
+        print("Error: SUPABASE_URL and SUPABASE_SERVICE_KEY must be set in the .env file.")
+        print("Please create a .env file with your Supabase credentials.")
         return
 
-    # Create the bucket if it doesn't exist
-    try:
-        client.storage.get_bucket(bucket_name)
-    except Exception:
-        client.storage.create_bucket(bucket_name)
+    # Test Supabase connection
+    client = get_supabase_client()
+    if not client:
+        print("Error: Could not create Supabase client.")
+        return
 
-    for root, _, files in os.walk(local_dir):
-        for file in files:
-            local_path = os.path.join(root, file)
-            # Create a relative path to maintain the directory structure in the bucket
-            relative_path = os.path.relpath(local_path, local_dir).replace("\\", "/")
-            supabase_path = f"{bucket_name}/{relative_path}"
+    print("✅ Supabase connection successful!")
 
-            print(f"Uploading {local_path} to {supabase_path}...")
+    # Define directories to upload
+    directories_to_upload = [
+        ("static/media", "static-media"),
+        ("staticfiles/media", "static-media"),
+    ]
 
-            with open(local_path, "rb") as f:
-                try:
-                    # Use the relative path as the file name in the bucket
-                    client.storage.from_(bucket_name).upload(
-                        path=relative_path,
-                        file=f,
-                        file_options={"content-type": "image/jpeg"}  # Adjust content type if needed
-                    )
-                    print(f"Successfully uploaded {file}")
-                except Exception as e:
-                    print(f"Error uploading {file}: {e}")
+    for local_dir, bucket_name in directories_to_upload:
+        if os.path.exists(local_dir):
+            print(f"\n📁 Uploading directory: {local_dir}")
+            print(f"🪣 Bucket: {bucket_name}")
+            
+            try:
+                uploaded_files = upload_directory_to_supabase(local_dir, bucket_name)
+                print(f"✅ Successfully uploaded {len(uploaded_files)} files from {local_dir}")
+                
+                # Print uploaded files
+                for file_path in uploaded_files:
+                    supabase_url = get_supabase_file_url(file_path, bucket_name)
+                    print(f"   📄 {file_path} -> {supabase_url}")
+                    
+            except Exception as e:
+                print(f"❌ Error uploading {local_dir}: {e}")
+        else:
+            print(f"⚠️  Directory not found: {local_dir}")
+
+    print("\n🎉 Upload process completed!")
+    print("\nNext steps:")
+    print("1. Run: python manage.py update_image_urls")
+    print("2. Deploy to Vercel: vercel --prod")
+
+def get_supabase_file_url(file_path, bucket_name):
+    """Get the public URL for a file in Supabase storage"""
+    supabase_url = os.getenv("SUPABASE_URL")
+    if not supabase_url:
+        return None
+    
+    return f"{supabase_url}/storage/v1/object/public/{bucket_name}/{file_path}"
 
 if __name__ == "__main__":
-    # Specify the local directory and the Supabase bucket name
-    static_media_directory = "static/media"
-    bucket_name = "static-media"
-
-    print(f"Starting upload from '{static_media_directory}' to bucket '{bucket_name}'...")
-    upload_directory_to_supabase(static_media_directory, bucket_name)
-    print("Upload process finished.")
+    main()
