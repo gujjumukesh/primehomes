@@ -1,0 +1,50 @@
+{
+  "builds": [
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "includeFiles": [
+          "requirements.txt",
+          "manage.py",
+          "core/**",
+          "construction_company/**",
+          "static/**",
+          "templates/**",
+          ".env"
+        ]
+      }
+    }
+  ],
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.11",
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/media/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "DJANGO_SECRET_KEY": "@django-secret-key",
+    "DEBUG": "false",
+    "SUPABASE_URL": "@supabase-url",
+    "SUPABASE_KEY": "@supabase-key",
+    "ALLOWED_HOSTS": "@allowed-hosts"
+  }
+}
