@@ -4,8 +4,8 @@ services:
     env: python
     plan: starter
     rootDir: .
-    buildCommand: pip install -r requirements.txt
-    startCommand: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn construction_company.wsgi:application --bind 0.0.0.0:$PORT
+    buildCommand: python3.11 -m pip install -r requirements.txt
+    startCommand: python3.11 manage.py migrate && python3.11 manage.py collectstatic --noinput && gunicorn construction_company.wsgi:application --bind 0.0.0.0:$PORT
     publishPath: ./staticfiles
     envVars:
       - key: WEB_CONCURRENCY
