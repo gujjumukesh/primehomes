@@ -36,7 +36,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost',
     '.vercel.app',
-    '.railway.app'
+    '.railway.app',
+    'primehomes-vizag.onrender.com'
 ]
 
 # Application definition
